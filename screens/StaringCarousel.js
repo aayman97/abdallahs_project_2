@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Dimensions, StyleSheet, Text, View,FlatList, TouchableOpacity,Animated, Platform } from 'react-native';
+import { Dimensions, StyleSheet, Text, View,FlatList, TouchableOpacity,Animated, Platform, Image } from 'react-native';
 import React from 'react';
 // import {useSharedValue , useAnimatedScrollHandler, useAnimatedStyle, interpolate, runOnJS, useAnimatedRef} from 'react-native-reanimated';
 import { AntDesign } from '@expo/vector-icons';
@@ -13,25 +13,25 @@ const {height,width} = Dimensions.get('screen')
 const StartingScreens = [
     {
       title : 'Let'+"\'s Start Wasting!",
-      image : '',
+      image : require('../assets/StartingScreens/garbage.png'),
       subTitle : 'Recieving Bags',
       captian : 'You'+"\'ll be recieving barcoded biodegradable bags from Plastale on a monthly basis."
     },
     {
       title : 'Fill and Drop!',
-      image : '',
+      image : require('../assets/StartingScreens/collectedgarbage.png'),
       subTitle : 'Dropping Off',
       captian : 'When your casy bin is full, drop your coded plastic bags in the nearest smart bin container.'
     },
     {
       title : 'Get Scanned!',
-      image : '',
+      image : require('../assets/StartingScreens/barcode.png'),
       subTitle : 'Collection Process',
       captian : 'Barcodes are scanned by collecters and points are automatically calculated to your account.'
     },
     {
       title : 'Happy Wasting!',
-      image : '',
+      image : require('../assets/StartingScreens/percentage.png'),
       subTitle : 'Collect & Win',
       captian : 'You can then redeem your points with voucher for resturants, cafes, shops, or pharmacies for discount.'
     },
@@ -108,6 +108,40 @@ return   <View style={styles.container}>
                                     fontWeight : 'bold',
                                     color : '#01953f'
                                 }}>{item.title}</Text>
+
+
+                                <View style={{
+                                    width : width*0.65,
+                                    height : width*0.65,
+                                    backgroundColor : 'transparent',
+                                    marginTop : height*0.04
+                                }}>
+                                    <Image
+                                    source={require('../assets/StartingScreens/background.png')}
+                                    style={{
+                                        width : width*0.65,
+                                        height : width*0.65,
+                                        resizeMode : 'contain',
+                                        position : 'relative',
+                                        transform : [{
+                                            rotate : (index*0)+'deg'
+                                        }]
+                                    }}
+                                    />
+                                      <Image
+                                    source={item.image}
+                                    style={{
+                                        width : width*0.6,
+                                        height : width*0.6,
+                                        resizeMode : 'contain',
+                                        position : 'absolute',
+                                        transform : [{
+                                            translateX : width*0.05
+                                        }]
+                                    }}
+                                    />
+
+                                </View>
                             </View>
 
                             <View style={{
@@ -167,7 +201,30 @@ return   <View style={styles.container}>
                   
             </View>
 
-            { activeIndex === StartingScreens.length-1 ? null : <TouchableOpacity style={{
+            { activeIndex === StartingScreens.length-1 ? (
+
+                <TouchableOpacity style={{
+                    width : width*0.25,
+                    height : width*0.12,
+                    backgroundColor : '#ffca4f',
+                    position : 'absolute',
+                    justifyContent : 'center',
+                    alignItems : 'center',
+                    borderRadius : width*0.27,
+                    transform : [{
+                        translateY : (height*0.49) -( width*0.15)
+                    },{
+                        translateX : (width/2.1)-(width*0.15),
+                    }]
+                }}
+                >
+                    <Text style={{
+                        color: 'white',
+                        fontWeight : 'bold',
+                        fontSize : 12
+                    }}>Get Started</Text>
+                </TouchableOpacity>
+            ) : <TouchableOpacity style={{
                         width : width*0.15,
                         height : width*0.15,
                         backgroundColor : 'transparent',
@@ -175,7 +232,7 @@ return   <View style={styles.container}>
                         justifyContent : 'center',
                         alignItems : 'center',
                         transform : [{
-                            translateY : (height*0.48) -( width*0.15)
+                            translateY : (height*0.49) -( width*0.15)
                         },{
                             translateX : (width/1.8)-(width*0.15),
                         }]

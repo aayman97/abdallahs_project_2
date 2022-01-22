@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Dimensions, StyleSheet, Text, View,FlatList, TouchableOpacity,Animated } from 'react-native';
+import { Dimensions, StyleSheet, Text, View,FlatList, TouchableOpacity,Animated, Platform } from 'react-native';
 import React from 'react';
 // import {useSharedValue , useAnimatedScrollHandler, useAnimatedStyle, interpolate, runOnJS, useAnimatedRef} from 'react-native-reanimated';
 import { AntDesign } from '@expo/vector-icons';
@@ -70,12 +70,20 @@ return   <View style={styles.container}>
                 keyExtractor={(_,i) => i}
                 horizontal
                 snapToInterval={width}
-                decelerationRate={'normal'}
+                decelerationRate={'fast'}
                 bounces={false}
                 overScrollMode={'never'}
                 onScroll={Animated.event(
                     [{ nativeEvent: { contentOffset: { x: opacityOffset } } }],
-                    { useNativeDriver: false, listener: ev => setActiveIndex(Math.ceil(ev.nativeEvent.contentOffset.x / width)) }
+                    { useNativeDriver: false, listener: ev => 
+                   { if(Platform.OS === 'android'){
+                    setActiveIndex(Math.ceil(ev.nativeEvent.contentOffset.x / width))        
+                    }else{
+                        setActiveIndex(Math.floor(ev.nativeEvent.contentOffset.x / width))
+                    }
+                }
+                    
+                    }
                   )}
                 scrollEventThrottle={16}
                 showsHorizontalScrollIndicator={false}

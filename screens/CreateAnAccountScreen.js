@@ -13,18 +13,24 @@ import {
   TouchableWithoutFeedback,
   TextInput,
   KeyboardAvoidingView,
+  ScrollView
 } from "react-native";
 import React from "react";
+
 // import {useSharedValue , useAnimatedScrollHandler, useAnimatedStyle, interpolate, runOnJS, useAnimatedRef} from 'react-native-reanimated';
 import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import DatePickerComponent from "./Components/DatePickerComponent";
+import CommunityDropBoxComponent from "./Components/CommunityDropBoxComponent";
+
 
 const { height, width } = Dimensions.get("screen");
 
 const CreateAnAccountScreen = () => {
-  const [fullname, setFullName] = React.useState("");
+  
+  
+
 
   const [data, setData] = React.useState({
     date: new Date(),
@@ -35,6 +41,7 @@ const CreateAnAccountScreen = () => {
     retypePassword: "",
     email: "",
     birthday: "Birthday",
+    community : 'Community',
     show: false,
   });
 
@@ -103,7 +110,7 @@ const CreateAnAccountScreen = () => {
     return (
       <TouchableWithoutFeedback
         onPress={() => {
-          console.log("Create Account");
+          console.log("Next to Create Account Screen 2");
         }}
       >
         <View
@@ -128,7 +135,7 @@ const CreateAnAccountScreen = () => {
               fontWeight: "300",
             }}
           >
-            Create Account
+           Next
           </Text>
         </View>
       </TouchableWithoutFeedback>
@@ -136,7 +143,9 @@ const CreateAnAccountScreen = () => {
   };
 
 
+
   return (
+    
     <TouchableWithoutFeedback
       onPress={() => {
         Keyboard.dismiss();
@@ -152,6 +161,8 @@ const CreateAnAccountScreen = () => {
           backgroundColor: "white",
         }}
       >
+
+
         <LinearGradient
           // Background Linear Gradient
           colors={["#00a79d", "black"]}
@@ -170,10 +181,12 @@ const CreateAnAccountScreen = () => {
             alignItems: "center",
           }}
         >
+
+
           <KeyboardAvoidingView
             style={{
               flex: 1,
-              marginTop: height * 0.07,
+            
               borderRadius: height * 0.1,
               justifyContent: "center",
               alignItems: "center",
@@ -183,8 +196,8 @@ const CreateAnAccountScreen = () => {
             <Image
               source={require("../assets/logowhiteWithoutWord.png")}
               style={{
-                width: width * 0.2,
-                height: width * 0.2,
+                width: width * 0.3,
+                height: width * 0.3,
                 resizeMode: "contain",
               }}
             />
@@ -204,7 +217,7 @@ const CreateAnAccountScreen = () => {
                 borderColor: "#04a299",
                 paddingHorizontal: width * 0.05,
                 backgroundColor: "transparent",
-                marginTop: height * 0.02,
+                marginTop: height * 0.05,
               }}
             >
               <TextInput
@@ -290,112 +303,10 @@ const CreateAnAccountScreen = () => {
               />
             </View>
 
-            {/* Password TextInput */}
-
-            <View
-              style={{
-                width: width * 0.6,
-                height: height * 0.07,
-                shadowOpacity: 0.3,
-                shadowRadius: 5,
-                elevation: width * 0.3,
-                overflow: Platform.OS === "android" ? "hidden" : "visible",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: width * 0.1,
-                borderWidth: 3,
-                borderColor: "#04a299",
-                paddingHorizontal: width * 0.05,
-                backgroundColor: "transparent",
-                marginTop: height * 0.02,
-              }}
-            >
-              <TextInput
-                placeholder="Password"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  fontSize: 20,
-                  color: "white",
-                }}
-                placeholderTextColor={"rgba(255,255,255,0.7)"}
-                secureTextEntry
-              />
-            </View>
-
-            {/* Retype password textinput */}
-
-            <View
-              style={{
-                width: width * 0.6,
-                height: height * 0.07,
-                shadowOpacity: 0.3,
-                shadowRadius: 5,
-                elevation: width * 0.3,
-                overflow: Platform.OS === "android" ? "hidden" : "visible",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: width * 0.1,
-                borderWidth: 3,
-                borderColor: "#04a299",
-                paddingHorizontal: width * 0.05,
-                backgroundColor: "transparent",
-                marginTop: height * 0.02,
-              }}
-            >
-              <TextInput
-                placeholder="Retype Password"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  fontSize: 20,
-                  color: "white",
-                }}
-                placeholderTextColor={"rgba(255,255,255,0.7)"}
-                secureTextEntry
-              />
-            </View>
-
-            {/* Email TextInput */}
-            <View
-              style={{
-                width: width * 0.6,
-                height: height * 0.07,
-                shadowOpacity: 0.3,
-                shadowRadius: 5,
-                elevation: width * 0.3,
-                overflow: Platform.OS === "android" ? "hidden" : "visible",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: width * 0.1,
-                borderWidth: 3,
-                borderColor: "#04a299",
-                paddingHorizontal: width * 0.05,
-                backgroundColor: "transparent",
-                marginTop: height * 0.02,
-              }}
-            >
-              <TextInput
-                placeholder="Email"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  fontSize: 20,
-                  color: "white",
-                }}
-                placeholderTextColor={"rgba(255,255,255,0.7)"}
-                textContentType="emailAddress"
-              />
-            </View>
-
-            <BirthdayButton />
-
+           
             <CreateAccountButton />
           </KeyboardAvoidingView>
         </LinearGradient>
-        {data.show && (
-          <DatePickerComponent date={data.date} onChange={onChange} />
-        )}
       </View>
     </TouchableWithoutFeedback>
   );
